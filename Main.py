@@ -12,8 +12,11 @@ print("Quel cout?")
 cost = input()
 
 tup1 = (product, technical, delay, quantity, cost)
-print(tup1)
+
 
 Afficheur
 
-print("Entrez le numéro de la solution qui vous convient")
+print("Entrez le numéro de la solution qui vous convient:")
+solution = input()
+
+print ("vous avez choisi")
