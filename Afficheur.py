@@ -29,16 +29,16 @@ class Afficheur(Thread):
 
 # Création des threads
 
-thread_1 = Afficheur("1-" + " Je vous propose " + Main.tup1[0] + ", les caracteristiques sont: " + Main.tup1[1] + ", le produit vous sera délivré en " + Main.tup1[2]
-                     + " jours pour une quantité de " + Main.tup1[3] + " et le cout de production vous sera de " + str(random.randint(1, 50)) + " euros" + "\n")
-thread_2 = Afficheur("2-" + " Je vous propose " + Main.tup1[0] + ", les caracteristiques sont: " + Main.tup1[1] + ", le produit vous sera délivré en " + Main.tup1[2]
-                     + " jours pour une quantité de " + Main.tup1[3] + " et le cout de production vous sera de " + Main.tup1[4] + " euros" + "\n")
-thread_3 = Afficheur("3-" + " Je vous propose " + Main.tup1[0] + ", les caracteristiques sont: " + Main.tup1[1] + ", le produit vous sera délivré en " + Main.tup1[2]
-                     + " jours pour une quantité de " + Main.tup1[3] + " et le cout de production vous sera de " + Main.tup1[4] + " euros" + "\n")
-thread_4 = Afficheur("4-" + " Je vous propose " + Main.tup1[0] + ", les caracteristiques sont: " + Main.tup1[1] + ", le produit vous sera délivré en " + Main.tup1[2]
-                     + " jours pour une quantité de " + Main.tup1[3] + " et le cout de production vous sera de " + Main.tup1[4] + " euros" + "\n")
-thread_5 = Afficheur("5-" + " Je vous propose " + Main.tup1[0] + ", les caracteristiques sont: " + Main.tup1[1] + ", le produit vous sera délivré en " + Main.tup1[2]
-                     + " jours pour une quantité de " + Main.tup1[3] + " et le cout de production vous sera de " + Main.tup1[4] + " euros" + "\n")
+thread_1 = Afficheur("1-" + " Je vous propose " + Main.tup1[0] + ", les caracteristiques sont: " + Main.tup1[1] + ", le produit vous sera délivré en " + str(random.randint(1, int(Main.tup1[2])))
+                     + " jours pour une quantité de " + str(random.randint(1, int(Main.tup1[3]))) + " et le cout de production vous sera de " + str(random.randint(1, int(Main.tup1[4]))) + " euros" + "\n")
+thread_2 = Afficheur("2-" + " Je vous propose " + Main.tup1[0] + ", les caracteristiques sont: " + Main.tup1[1] + ", le produit vous sera délivré en " + str(random.randint(1, int(Main.tup1[2])))
+                     + " jours pour une quantité de " + str(random.randint(1, int(Main.tup1[3]))) + " et le cout de production vous sera de " + str(random.randint(1, int(Main.tup1[4]))) + " euros" + "\n")
+thread_3 = Afficheur("3-" + " Je vous propose " + Main.tup1[0] + ", les caracteristiques sont: " + Main.tup1[1] + ", le produit vous sera délivré en " + str(random.randint(1, int(Main.tup1[2])))
+                     + " jours pour une quantité de " + str(random.randint(1, int(Main.tup1[3]))) + " et le cout de production vous sera de " + str(random.randint(1, int(Main.tup1[4]))) + " euros" + "\n")
+thread_4 = Afficheur("4-" + " Je vous propose " + Main.tup1[0] + ", les caracteristiques sont: " + Main.tup1[1] + ", le produit vous sera délivré en " + str(random.randint(1, int(Main.tup1[2])))
+                     + " jours pour une quantité de " + str(random.randint(1, int(Main.tup1[3]))) + " et le cout de production vous sera de " + str(random.randint(1, int(Main.tup1[4]))) + " euros" + "\n")
+thread_5 = Afficheur("5-" + " Je vous propose " + Main.tup1[0] + ", les caracteristiques sont: " + Main.tup1[1] + ", le produit vous sera délivré en " + str(random.randint(1, int(Main.tup1[2])))
+                     + " jours pour une quantité de " + str(random.randint(1, int(Main.tup1[3]))) + " et le cout de production vous sera de " + str(random.randint(1, int(Main.tup1[4]))) + " euros" + "\n")
 
 # Lancement des threads
 thread_1.start()
