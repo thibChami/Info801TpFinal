@@ -3,9 +3,9 @@ import threading
 import time
 
 
-
-espaceTuple = []
-
+stop =0
+espaceTupleClient = []
+espaceTupleMO = []
 
 #!/usr/bin/python
 
@@ -25,20 +25,30 @@ class myThread (threading.Thread):
       print ("Starting " + self.name)
       print_time(self.name, 5, self.counter)
       print ("Exiting " + self.name)
-
+     
+            
+            
 def print_time(threadName, counter, delay):
-    while len(espaceTuple) == 0 :
-        time.sleep(delay)
-        print ("%s: %s : %s" % (threadName, time.ctime(time.time()) , "je susi en attente"))
-    print(espaceTuple[0])
-    #Afficheur.afficheur(espaceTuple[0]);
-    time.sleep(5)
-
+    global espaceTupleMO
+    while  not stop :
+        if len(espaceTupleMO) != 0 :
+            time.sleep(delay)
+                #print ("%s: %s : %s" % (threadName, time.ctime(time.time()) , "je susi en attente"))
+            print(espaceTupleMO[0])
+            for x in Afficheur.afficheur(espaceTupleMO[0]):
+                espaceTupleClient.append(x)
+            print(espaceTupleMO)
+            espaceTupleMO=[]   
+            
+            time.sleep(5)
+    
     if exitFlag:
          threadName.exit()
     
 
 def main():
+    global espaceTupleMO
+    global espaceTupleClient
 
 
 
@@ -65,16 +75,36 @@ def main():
     print("Quel cout?")
     cost = input()
     tup1 = (product, technical, delay, quantity, cost)
-    
+    choose = 0
 
-    espaceTuple.append(tup1)
+    while not choose :
+        espaceTupleMO.append(tup1)
+        time.sleep(5)
+
+        while len(espaceTupleClient) == 0 :
+                time.sleep(5)
+        
+        
+        print("Entrez le numéro de la solution qui vous convient:")
+        solution = input()
+        print(solution)
+        if solution == "0" :
+            print  ("vous avez rien choisi")
+
+        else:
+            res = espaceTupleClient[int(solution)-1]
+            print  ("vous avez choisi :" , res)
+            choose = 1
+        espaceTupleMO=[]
+    
 
   
-
-    print("Entrez le numéro de la solution qui vous convient:")
-    solution = input()
-
-    print ("vous avez choisi")
     
+   
+    print("stop")  
+    global stop
+    stop =1
+    
+   
 if __name__ == "__main__":
     main();

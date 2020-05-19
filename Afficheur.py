@@ -59,3 +59,6 @@ def afficheur(tup1):
     thread_3.join()
     thread_4.join()
     thread_5.join()
+    
+    
+    return     first_tuple,second_tuple ,fourth_tuple ,fifth_tuple
