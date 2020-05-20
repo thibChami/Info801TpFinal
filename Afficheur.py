@@ -4,7 +4,7 @@ from threading import Thread, RLock
 import time
 import Main
 verrou = RLock()
-global fabrication_list
+
 class Afficheur(Thread):
 
     """Thread chargé simplement d'afficher un phrase dans la console."""
@@ -33,7 +33,7 @@ def afficheur(tup1):
     third_tuple =(tup1[0], tup1[1], (random.randint(1, int(tup1[2]))), (random.randint(1, int(tup1[3]))), (random.randint(1, int(tup1[4]))))
     fourth_tuple = (tup1[0], tup1[1], (random.randint(1, int(tup1[2]))), (random.randint(1, int(tup1[3]))), (random.randint(1, int(tup1[4]))))
     fifth_tuple = (tup1[0], tup1[1], (random.randint(1, int(tup1[2]))), (random.randint(1, int(tup1[3]))), (random.randint(1, int(tup1[4]))))
-    fabrication_list = (first_tuple, second_tuple, third_tuple, fourth_tuple, fifth_tuple)
+
 
     thread_1 = Afficheur("1-" + " Je vous propose " + first_tuple[0] + ", les caracteristiques sont: " + first_tuple[1] + ", le produit vous sera délivré en " + str(first_tuple[2])
                          + " jours pour une quantité de " + str(first_tuple[3]) + " et le cout de production vous sera de " + str(first_tuple[4]) + " euros" + "\n")
@@ -59,3 +59,6 @@ def afficheur(tup1):
     thread_3.join()
     thread_4.join()
     thread_5.join()
+    
+    
+    return     first_tuple,second_tuple ,fourth_tuple ,fifth_tuple
