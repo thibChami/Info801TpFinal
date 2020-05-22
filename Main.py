@@ -9,7 +9,7 @@ espaceTupleMO = []
 espaceTupleCond = []
 espaceTupleT = []
 #!/usr/bin/python
-
+rest =[]
 
 
 exitFlag = 0
@@ -40,10 +40,9 @@ def maitre_oeuvre(threadName, counter, delay):
         if len(espaceTupleMO) != 0 :
             time.sleep(delay)
                 #print ("%s: %s : %s" % (threadName, time.ctime(time.time()) , "je susi en attente"))
-            print(espaceTupleMO[0])
+
             for x in Afficheur.afficheur(espaceTupleMO[0]):
                 espaceTupleClient.append(x)
-            print(espaceTupleMO)
             espaceTupleMO=[]   
             
             time.sleep(5)
@@ -53,15 +52,12 @@ def maitre_oeuvre(threadName, counter, delay):
 
 def conditionnement(threadName, counter, delay):
     global espaceTupleCond
-    print("cond")
     while  not stop :
         if len(espaceTupleCond) != 0 :
             time.sleep(delay)
                 #print ("%s: %s : %s" % (threadName, time.ctime(time.time()) , "je susi en attente"))
-            print(espaceTupleCond[0])
             for x in Afficheur.afficheur2(espaceTupleCond[0]):
                 espaceTupleClient.append(x)
-            print(espaceTupleCond)
             espaceTupleCond=[]   
 
             time.sleep(5)
@@ -71,16 +67,14 @@ def conditionnement(threadName, counter, delay):
 
 def transport(threadName, counter, delay):
     global espaceTupleT
-    print("t");
+
     
     while  not stop :
         if len(espaceTupleT) != 0 :
             time.sleep(delay)
                 #print ("%s: %s : %s" % (threadName, time.ctime(time.time()) , "je susi en attente"))
-            print(espaceTupleT[0])
             for x in Afficheur.afficheur3(espaceTupleT[0]):
                 espaceTupleClient.append(x)
-            print(espaceTupleT)
             espaceTupleT=[]   
 
             time.sleep(5)
@@ -94,7 +88,7 @@ def main():
     global espaceTupleClient
     global espaceTupleCond
     global espaceTupleT
-
+    global rest
 
     # Create new threads
     thread1 = myThread(1, "maitre d'oeuvre", 2)
@@ -130,15 +124,17 @@ def main():
                 time.sleep(5)
         
         
-        print("Entrez le numéro de la solution qui vous convient:")
+        print(" Entrez le numéro de la solution qui vous convient: ")
         solution = input()
         print(solution)
         if solution == "0" :
-            print  ("vous avez rien choisi")
+            print  ("vous n'avez rien choisi ")
 
         else:
-            res = espaceTupleClient[int(solution)-1]
-            print  ("vous avez choisi :" , res)
+            rest.append(espaceTupleClient[int(solution)-1])
+            res = rest[0]
+            print  ("vous avez choisi :" , str(res[0]) + ", les caracteristiques sont: " + res[1] + ", le produit vous sera délivré en " + str(res[2])
+                         + " jours pour une quantité de " + str(res[3]) + " et le cout de production vous sera de " + str(res[4]) + " euros" + "\n")
             choose = 1
         espaceTupleMO=[]
         espaceTupleClient=[]
@@ -154,16 +150,16 @@ def main():
             time.sleep(5)
         
         
-        print("Entrez le numéro de la solution qui vous convient:")
+        print("Entrez le numéro de la solution qui vous convient : ")
         solution = input()
-        print(solution)
         if solution == "0" :
             print  ("vous avez rien choisi")
 
         else:
-            res = espaceTupleClient[int(solution)-1]
-            print  ("vous avez choisi :" , res)
-            choose = 1
+           rest.append(espaceTupleClient[int(solution)-1])
+           res = rest[1]
+           print  ("vous avez choisi : " ,  "le matériau " + res[1] + " cela vous coutera " + str(res[0]) + " €" )
+           choose = 1
         espaceTupleClient=[]
         espaceTupleCond=[]
    
@@ -181,18 +177,19 @@ def main():
         
         print("Entrez le numéro de la solution qui vous convient:")
         solution = input()
-        print(solution)
         if solution == "0" :
             print  ("vous avez rien choisi")
 
         else:
-            res = espaceTupleClient[int(solution)-1]
-            print  ("vous avez choisi :" , res)
+            rest.append(espaceTupleClient[int(solution)-1])
+            res = rest[2]
+            print  ("vous avez choisi :" ,    " La société " + str(res[1]) + " et  le transport durera   " + str(res[0]) +    " min\n")
+
             choose = 1
         espaceTupleClient=[]
         espaceTupleT=[]
         
-        
+    print(rest[0][4])            
     print("stop")  
     global stop
     stop =1
