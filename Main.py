@@ -8,6 +8,7 @@ espaceTupleClient = []
 espaceTupleMO = []
 espaceTupleCond = []
 espaceTupleT = []
+espaceTupleDetail = []
 #!/usr/bin/python
 rest =[]
 
@@ -30,6 +31,11 @@ class myThread (threading.Thread):
             conditionnement(self.name, 5, self.counter)
         if self.name == "transport":
             transport(self.name, 5, self.counter) 
+        if self.name == "detaillant":
+            detaillant(self.name, 5, self.counter) 
+            
+            
+            
         print ("Exiting " + self.name)
      
             
@@ -81,24 +87,43 @@ def transport(threadName, counter, delay):
 
 
     if exitFlag:
-         threadName.exit()         
+         threadName.exit()   
+         
+def detaillant(threadName, counter, delay):
+    global espaceTupleDetail
 
+    
+    while  not stop :
+        if len(espaceTupleDetail) != 0 :
+            time.sleep(delay)
+                #print ("%s: %s : %s" % (threadName, time.ctime(time.time()) , "je susi en attente"))
+            for x in Afficheur.afficheur4(espaceTupleDetail[0]):
+                espaceTupleClient.append(x)
+            espaceTupleDetail=[]   
+
+            time.sleep(5)
+
+
+    if exitFlag:
+         threadName.exit()      
 def main():
     global espaceTupleMO
     global espaceTupleClient
     global espaceTupleCond
     global espaceTupleT
     global rest
-
+    global espaceTupleDetail
     # Create new threads
     thread1 = myThread(1, "maitre d'oeuvre", 2)
     thread2 = myThread(2, "conditionnement", 2)
     thread3 = myThread(3, "transport", 2)
+    thread4 = myThread(4, "detaillant", 2)
 
     # Start new Threads
     thread1.start()
     thread2.start()
     thread3.start()
+    thread4.start()
 
 
 
@@ -183,13 +208,43 @@ def main():
         else:
             rest.append(espaceTupleClient[int(solution)-1])
             res = rest[2]
-            print  ("vous avez choisi :" ,    " La société " + str(res[1]) + " et  le transport durera   " + str(res[0]) +    " min\n")
+            print  ("vous avez choisi :" ,    " La société " + str(res[1]) + " et  le transport durera   " + str(res[0]) +     " min " + "le cout sera de 50 € \n")
 
             choose = 1
         espaceTupleClient=[]
         espaceTupleT=[]
+      
+
+
+    choose =0
+    
+    cout = rest[0][4] +rest[1][0] +50
+    while not choose :
+        espaceTupleDetail.append((cout  ,"test"))
+        time.sleep(5)
+
+        while len(espaceTupleClient) == 0 :
+            time.sleep(5)
         
-    print(rest[0][4])            
+        
+        print("Entrez le numéro de la solution qui vous convient:")
+        solution = input()
+        if solution == "0" :
+            print  ("vous avez rien choisi")
+
+        else:
+            rest.append(espaceTupleClient[int(solution)-1])
+            res = rest[3]
+            print  ("vous avez choisi :" ,    " Le revendeur  " + str(res[1]) + " il revendra le produit  pour  " + str(res[0]) +    " €   vous ferez "+ str(res[0] - cout) + "€ de bénéfice " +" \n")
+
+            choose = 1
+        espaceTupleClient=[]
+        espaceTupleDetail=[]
+
+    
+        
+    print  ("vous avez fait un totale de "+ str(res[0] - cout    * rest[0][3] )   + "€ de bénéfice au totale  " +" \n")
+     
     print("stop")  
     global stop
     stop =1
